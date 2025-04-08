@@ -33,8 +33,16 @@
 - 💾 **Guardado y carga** de contactos mediante archivos JSON
 - 🎨 **Interfaz colorida** para una mejor experiencia de usuario
 - 🔒 **Validación de datos** para garantizar la integridad de la información
+- 🖥️ **Archivo ejecutable** disponible para usuarios sin Python instalado
 
 ## 🚀 Instalación
+
+### Opción 1: Ejecutable (Windows)
+
+1. Descarga el archivo `agenda_contactos.exe`
+2. Ejecuta la aplicación haciendo doble clic en el archivo descargado
+
+### Opción 2: Código Fuente
 
 1. Clona este repositorio:
    ```bash
@@ -54,6 +62,10 @@
 
 ## 🔧 Requisitos
 
+Para el ejecutable:
+- Sistema operativo Windows
+
+Para el código fuente:
 - Python 3.6 o superior
 - Módulo colorama (`pip install colorama`)
 
@@ -82,8 +94,9 @@ Selecciona una opción ingresando el número correspondiente y sigue las instruc
 agenda-contactos/
 │
 ├── agenda_contactos.py      # Archivo principal del programa
+├── agenda_contactos.exe     # Ejecutable para Windows
 ├── agenda_contactos.json    # Archivo donde se guardan los contactos (generado automáticamente)
-├── LICENCE                  # Licencia
+├── LICENSE                  # Licencia
 └── README.md                # Este archivo
 ```
 
@@ -212,6 +225,10 @@ No te preocupes por las tildes. La aplicación está diseñada para ignorar tild
 ### ¿Hay un límite de contactos que puedo guardar?
 
 No hay un límite explícito en el número de contactos que puedes guardar. El límite dependerá de la memoria disponible en tu sistema.
+
+### ¿Por qué usar el ejecutable en lugar del código Python?
+
+El ejecutable (.exe) es conveniente si no tienes Python instalado en tu sistema o prefieres una solución "portátil" que no requiera instalación. Sin embargo, el código fuente te permite personalizar y modificar la aplicación según tus necesidades.
 
 ## 📜 Licencia
 
