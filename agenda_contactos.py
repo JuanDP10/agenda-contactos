@@ -121,32 +121,56 @@ def buscar_contactos():
 
 # Función que guarda la lista de contactos en un archivo JSON
 def guardar_en_archivo():
+    # Verifica si la agenda está vacía
+    if not agenda:
+        print(Fore.YELLOW + "[!] La agenda está vacía. No hay nada que guardar.")
+        return  # Sale de la función sin guardar
+    
+    # Confirma antes de sobrescribir el archivo
+    confirmar = input(Fore.CYAN + "¿Está seguro de guardar la agenda? Esto sobrescribirá la versión anterior. (s/n): ").strip().lower()
+    
+    if confirmar != 's':
+        print(Fore.YELLOW + "[i] Guardado cancelado por el usuario.")
+        return
+    
     try:
         with open("agenda_contactos.json", "w", encoding='utf-8') as f:
-            json.dump(agenda, f, indent=4, ensure_ascii=False)  # Guarda con indentación y caracteres especiales
+            json.dump(agenda, f, indent=4, ensure_ascii=False)  # Guarda con indentación y permite tildes/ñ
         print(Fore.GREEN + "[✔] Contactos guardados correctamente.")
     except Exception as e:
         print(Fore.RED + f"[!] Error al guardar: {e}")
 
+
 # Función que carga contactos desde un archivo JSON
 def cargar_desde_archivo():
     global agenda
+    
+    # Si la agenda ya tiene datos, advertir al usuario que se va a sobrescribir
+    if agenda:
+        confirmar = input(Fore.CYAN + "Cargar sobrescribirá los contactos actuales en memoria. ¿Está seguro? (s/n): ").strip().lower()
+        if confirmar != 's':
+            print(Fore.YELLOW + "[i] Carga cancelada por el usuario.")
+            return  # Salir sin hacer nada
+    
     try:
         with open("agenda_contactos.json", "r", encoding='utf-8') as f:
-            agenda = json.load(f)  # Sobrescribe la agenda con los datos del archivo
+            agenda = json.load(f)
         print(Fore.GREEN + "[✔] Contactos cargados correctamente.")
-        
-        # Compatibilidad con registros anteriores que no tengan nombre y apellido por separado
+
+        # Compatibilidad con registros antiguos que no tengan 'apellido'
         for contacto in agenda:
             if 'apellido' not in contacto:
                 nombres = contacto['nombre'].split(' ', 1)
                 contacto['nombre'] = nombres[0]
                 contacto['apellido'] = nombres[1] if len(nombres) > 1 else ""
-                
+    
     except FileNotFoundError:
-        print(Fore.RED + "[!] No se encontró el archivo.")
+        print(Fore.RED + "[!] No se encontró el archivo 'agenda_contactos.json'.")
+    except json.JSONDecodeError:
+        print(Fore.RED + "[!] El archivo existe pero no tiene un formato JSON válido.")
     except Exception as e:
         print(Fore.RED + f"[!] Error al cargar: {e}")
+
 
 # Bucle principal del sistema (menú interactivo)
 while True:
