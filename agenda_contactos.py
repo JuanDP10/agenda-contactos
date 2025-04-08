@@ -194,63 +194,68 @@ while True:
     elif seleccion == '3':
         limpiar_pantalla()
         print_encabezado("\u274C ELIMINAR CONTACTO")
-        busqueda = solicitar_campo("Nombre del contacto a eliminar (0 para cancelar): ")
-        if busqueda.strip() == '0':
-            print(Fore.YELLOW + "[i] Eliminación cancelada.")
-            continue  # Cancela la eliminación si el usuario ingresa '0'
-        busqueda_normalizada = normalizar_texto(busqueda)
-        try:
-            contactos_encontrados = []
-            
-            # Busca el contacto ignorando tildes
-            for i, contacto in enumerate(agenda):
-                nombre_completo = f"{contacto['nombre']} {contacto['apellido']}"
-                if busqueda_normalizada in normalizar_texto(nombre_completo):
-                    contactos_encontrados.append((i, contacto))
-            
-            if not contactos_encontrados:
-                raise ValueError
+        if not agenda:
+            print(Fore.YELLOW + "[!] No hay contactos registrados.")
+            input(Fore.CYAN + "\nPresione Enter para volver al menú...")
+            continue
+        else:
+            busqueda = solicitar_campo("Nombre del contacto a eliminar (0 para cancelar): ")
+            if busqueda.strip() == '0':
+                print(Fore.YELLOW + "[i] Eliminación cancelada.")
+                continue  # Cancela la eliminación si el usuario ingresa '0'
+            busqueda_normalizada = normalizar_texto(busqueda)
+            try:
+                contactos_encontrados = []
                 
-            # Si hay más de un contacto que coincide, mostrar opciones
-            if len(contactos_encontrados) > 1:
-                print(Fore.YELLOW + "Se encontraron varios contactos:")
-                for idx, (i, contacto) in enumerate(contactos_encontrados, 1):
+                # Busca el contacto ignorando tildes
+                for i, contacto in enumerate(agenda):
                     nombre_completo = f"{contacto['nombre']} {contacto['apellido']}"
-                    print(f"{idx}. {nombre_completo}")
+                    if busqueda_normalizada in normalizar_texto(nombre_completo):
+                        contactos_encontrados.append((i, contacto))
                 
-                while True:
-                    try:
-                        seleccion_contacto = int(input("\nSeleccione el número del contacto a eliminar (0 para cancelar): "))
-                        if seleccion_contacto == 0:
-                            print(Fore.YELLOW + "[i] Eliminación cancelada.")
-                            break
-                        elif 1 <= seleccion_contacto <= len(contactos_encontrados):
-                            i, contacto = contactos_encontrados[seleccion_contacto-1]
-                            nombre_completo = f"{contacto['nombre']} {contacto['apellido']}"
-                            confirmar = input(f"¿Está seguro de eliminar a {nombre_completo}? (s/n): ").strip().lower()
-                            if confirmar == 's':
-                                agenda.pop(i)  # Elimina el contacto
-                                print(Fore.GREEN + f"[✔] Contacto '{nombre_completo}' eliminado correctamente.")
-                            else:
-                                print(Fore.YELLOW + "[i] Eliminación cancelada.")
-                            break
-                        else:
-                            print(Fore.RED + "[!] Número inválido.")
-                    except ValueError:
-                        print(Fore.RED + "[!] Ingrese un número válido.")
-            # Si solo hay un contacto, preguntar directamente
-            elif len(contactos_encontrados) == 1:
-                i, contacto = contactos_encontrados[0]
-                nombre_completo = f"{contacto['nombre']} {contacto['apellido']}"
-                confirmar = input(f"¿Está seguro de eliminar a {nombre_completo}? (s/n): ").strip().lower()
-                if confirmar == 's':
-                    agenda.pop(i)  # Elimina el contacto
-                    print(Fore.GREEN + f"[✔] Contacto '{nombre_completo}' eliminado correctamente.")
-                else:
-                    print(Fore.YELLOW + "[i] Eliminación cancelada.")
+                if not contactos_encontrados:
+                    raise ValueError
                     
-        except ValueError:
-            print(Fore.RED + "[!] Contacto no encontrado.")
+                # Si hay más de un contacto que coincide, mostrar opciones
+                if len(contactos_encontrados) > 1:
+                    print(Fore.YELLOW + "Se encontraron varios contactos:")
+                    for idx, (i, contacto) in enumerate(contactos_encontrados, 1):
+                        nombre_completo = f"{contacto['nombre']} {contacto['apellido']}"
+                        print(f"{idx}. {nombre_completo}")
+                    
+                    while True:
+                        try:
+                            seleccion_contacto = int(input("\nSeleccione el número del contacto a eliminar (0 para cancelar): "))
+                            if seleccion_contacto == 0:
+                                print(Fore.YELLOW + "[i] Eliminación cancelada.")
+                                break
+                            elif 1 <= seleccion_contacto <= len(contactos_encontrados):
+                                i, contacto = contactos_encontrados[seleccion_contacto-1]
+                                nombre_completo = f"{contacto['nombre']} {contacto['apellido']}"
+                                confirmar = input(f"¿Está seguro de eliminar a {nombre_completo}? (s/n): ").strip().lower()
+                                if confirmar == 's':
+                                    agenda.pop(i)  # Elimina el contacto
+                                    print(Fore.GREEN + f"[✔] Contacto '{nombre_completo}' eliminado correctamente.")
+                                else:
+                                    print(Fore.YELLOW + "[i] Eliminación cancelada.")
+                                break
+                            else:
+                                print(Fore.RED + "[!] Número inválido.")
+                        except ValueError:
+                            print(Fore.RED + "[!] Ingrese un número válido.")
+                # Si solo hay un contacto, preguntar directamente
+                elif len(contactos_encontrados) == 1:
+                    i, contacto = contactos_encontrados[0]
+                    nombre_completo = f"{contacto['nombre']} {contacto['apellido']}"
+                    confirmar = input(f"¿Está seguro de eliminar a {nombre_completo}? (s/n): ").strip().lower()
+                    if confirmar == 's':
+                        agenda.pop(i)  # Elimina el contacto
+                        print(Fore.GREEN + f"[✔] Contacto '{nombre_completo}' eliminado correctamente.")
+                    else:
+                        print(Fore.YELLOW + "[i] Eliminación cancelada.")
+                        
+            except ValueError:
+                print(Fore.RED + "[!] Contacto no encontrado.")
 
     elif seleccion == '4':
         buscar_contactos()  # Llama a la función de búsqueda
