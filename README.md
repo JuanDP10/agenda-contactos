@@ -83,6 +83,7 @@ agenda-contactos/
 │
 ├── agenda_contactos.py      # Archivo principal del programa
 ├── agenda_contactos.json    # Archivo donde se guardan los contactos (generado automáticamente)
+├── LICENCE                  # Licencia
 └── README.md                # Este archivo
 ```
 
@@ -104,7 +105,7 @@ REGISTRO DE CONTACTO
 --------------------
 Nombre: Juan Diego
 Apellido: Pinilla
-Teléfono: 3146196336
+Teléfono: 3156196336
 Ciudad: Cali
 Edad: 21
 Email: juan@gmail.com
@@ -147,7 +148,7 @@ Cada contacto se almacena como un diccionario con los siguientes campos:
 {
     "nombre": "Juan Diego",
     "apellido": "Pinilla",
-    "telefono": "3146196336",
+    "telefono": "3156196336",
     "ciudad": "Cali",
     "edad": 21,
     "email": "juan@gmail.com"
@@ -161,7 +162,7 @@ Cada contacto se almacena como un diccionario con los siguientes campos:
     {
         "nombre": "Juan Diego",
         "apellido": "Pinilla",
-        "telefono": "3146196336",
+        "telefono": "3156196336",
         "ciudad": "Cali",
         "edad": 21,
         "email": "juan@gmail.com"
