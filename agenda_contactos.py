@@ -1,8 +1,18 @@
 import json  # Módulo para trabajar con archivos JSON
+import os  # Módulo para comandos del sistema
+import platform  # Módulo para detectar sistema operativo
 from colorama import init, Fore, Style  # Módulo para colorear texto en la terminal
 import unicodedata  # Módulo para normalizar texto (quitar tildes)
 
 init(autoreset=True)  # Inicializa colorama para que los colores se reinicien automáticamente después de cada impresión
+
+# Función para limpiar la pantalla según el sistema operativo
+# Se usa para mantener la interfaz limpia y ordenada entre acciones
+def limpiar_pantalla():
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
 
 # Función para eliminar tildes y otros caracteres diacríticos
 def normalizar_texto(texto):
@@ -76,6 +86,7 @@ def mostrar_contactos(lista=None):
 # Función para buscar contactos por ciudad o edad mínima
 def buscar_contactos():
     while True:
+        limpiar_pantalla()
         print_encabezado("\U0001F50D BÚSQUEDA DE CONTACTOS")
         print("1. Buscar por ciudad \U0001F3D9️")
         print("2. Buscar por edad mínima \U0001F464")
@@ -135,6 +146,7 @@ def cargar_desde_archivo():
 
 # Bucle principal del sistema (menú interactivo)
 while True:
+    limpiar_pantalla()
     print_encabezado("\U0001F4D8 MENÚ DE AGENDA")
     for opcion in menu_options:
         print(Fore.BLUE + opcion)  # Muestra todas las opciones del menú
@@ -142,35 +154,50 @@ while True:
     seleccion = input(Fore.CYAN + "\nSeleccione una opción (1-7): ")
 
     if seleccion == '1':
-        print_encabezado("\U0001F4DD REGISTRO DE CONTACTO")
-        
-        # Solicitar datos obligatorios
-        nombre = solicitar_campo("Nombre: ")
-        apellido = solicitar_campo("Apellido: ")
-        telefono = solicitar_campo("Teléfono: ")
-        ciudad = solicitar_campo("Ciudad: ")
-        edad = solicitar_campo("Edad: ", validar_edad)
-        email = solicitar_campo("Email: ", validar_email)
+        while True:
+            limpiar_pantalla()
+            print_encabezado("\U0001F4DD REGISTRO DE CONTACTO")
+            print("1. Ingresar un nuevo contacto")
+            print("0. Cancelar y volver al menú principal")
+            opcion_registro = input("Seleccione una opción: ").strip()
 
-        # Diccionario con la información del contacto
-        contacto = {
-            "nombre": nombre,
-            "apellido": apellido,
-            "telefono": telefono,
-            "ciudad": ciudad,
-            "edad": int(edad),  # Convertir a entero ya que fue validado previamente
-            "email": email
-        }
+            if opcion_registro == '0':
+                print(Fore.YELLOW + "[i] Registro cancelado. Volviendo al menú principal.")
+                break  # Salimos de esta sección y volvemos al menú principal
+            
+            elif opcion_registro == '1':
+                # Solicitar datos obligatorios
+                nombre = solicitar_campo("Nombre: ")
+                apellido = solicitar_campo("Apellido: ")
+                telefono = solicitar_campo("Teléfono: ")
+                ciudad = solicitar_campo("Ciudad: ")
+                edad = solicitar_campo("Edad: ", validar_edad)
+                email = solicitar_campo("Email: ", validar_email)
 
-        agenda.append(contacto)  # Agrega el contacto a la agenda
-        print(Fore.GREEN + "[✔] Contacto registrado exitosamente.")
+                # Diccionario con la información del contacto
+                contacto = {
+                    "nombre": nombre,
+                    "apellido": apellido,
+                    "telefono": telefono,
+                    "ciudad": ciudad,
+                    "edad": int(edad),  # Convertir a entero ya que fue validado previamente
+                    "email": email
+                }
+
+                agenda.append(contacto)  # Agrega el contacto a la agenda
+                print(Fore.GREEN + "[✔] Contacto registrado exitosamente.")
 
     elif seleccion == '2':
+        limpiar_pantalla() # Llama a la función para limpiar la pantalla
         mostrar_contactos()  # Llama a la función para mostrar todos los contactos
 
     elif seleccion == '3':
+        limpiar_pantalla()
         print_encabezado("\u274C ELIMINAR CONTACTO")
-        busqueda = solicitar_campo("Nombre del contacto a eliminar: ")
+        busqueda = solicitar_campo("Nombre del contacto a eliminar (0 para cancelar): ")
+        if busqueda.strip() == '0':
+            print(Fore.YELLOW + "[i] Eliminación cancelada.")
+            continue  # Cancela la eliminación si el usuario ingresa '0'
         busqueda_normalizada = normalizar_texto(busqueda)
         try:
             contactos_encontrados = []
@@ -229,12 +256,15 @@ while True:
         buscar_contactos()  # Llama a la función de búsqueda
 
     elif seleccion == '5':
+        limpiar_pantalla()
         guardar_en_archivo()  # Llama a la función para guardar la agenda
 
     elif seleccion == '6':
+        limpiar_pantalla()
         cargar_desde_archivo()  # Llama a la función para cargar la agenda
 
     elif seleccion == '7':
+        limpiar_pantalla()
         print_encabezado("\U0001F44B SALIENDO DEL SISTEMA")
         print(Fore.MAGENTA + "Gracias por usar la Agenda. ¡Hasta pronto!")
         break  # Termina el programa
