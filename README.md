@@ -212,20 +212,10 @@ No te preocupes por las tildes. La aplicación está diseñada para ignorar tild
 
 No hay un límite explícito en el número de contactos que puedes guardar. El límite dependerá de la memoria disponible en tu sistema.
 
-## 🤝 Contribuir
-
-¡Las contribuciones son bienvenidas! Si deseas mejorar esta aplicación, puedes:
-
-1. Fork este repositorio
-2. Crear una nueva rama (`git checkout -b feature/nueva-funcionalidad`)
-3. Realizar tus cambios y hacer commit (`git commit -am 'Agregar nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Crear un Pull Request
-
 ## 📜 Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
 ---
 
-⌨️ con ❤️ por [Tu Nombre](https://github.com/JuanDP10) 😊
+⌨️ con ❤️ por [Juan Diego Pinilla](https://github.com/JuanDP10) 😊
