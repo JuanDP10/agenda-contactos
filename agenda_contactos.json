@@ -1,0 +1,82 @@
+[
+    {
+        "nombre": "Juan Diego",
+        "apellido": "Pinilla",
+        "telefono": "3146196336",
+        "ciudad": "Cali",
+        "edad": 21,
+        "email": "juan@gmail.com"
+    },
+    {
+        "nombre": "Mayerli",
+        "apellido": "Muñoz",
+        "telefono": "3126729021",
+        "ciudad": "Armenia",
+        "edad": 22,
+        "email": "maye@gmail.com"
+    },
+    {
+        "nombre": "Carlos",
+        "apellido": "Méndez",
+        "telefono": "3104457890",
+        "ciudad": "Medellín",
+        "edad": 35,
+        "email": "carlos.mendez@correo.com"
+    },
+    {
+        "nombre": "Laura",
+        "apellido": "Gómez",
+        "telefono": "3019876543",
+        "ciudad": "Bogotá",
+        "edad": 28,
+        "email": "laura.gomez@gmail.com"
+    },
+    {
+        "nombre": "Andrés",
+        "apellido": "Ríos",
+        "telefono": "3206549871",
+        "ciudad": "Cali",
+        "edad": 42,
+        "email": "andres.rios@hotmail.com"
+    },
+    {
+        "nombre": "Valentina",
+        "apellido": "Torres",
+        "telefono": "3001234567",
+        "ciudad": "Pereira",
+        "edad": 19,
+        "email": "valentina.torres@outlook.com"
+    },
+    {
+        "nombre": "Daniela",
+        "apellido": "Martínez",
+        "telefono": "3135566778",
+        "ciudad": "Bucaramanga",
+        "edad": 30,
+        "email": "daniela.mtz@gmail.com"
+    },
+    {
+        "nombre": "Jorge",
+        "apellido": "Salazar",
+        "telefono": "3167788990",
+        "ciudad": "Manizales",
+        "edad": 45,
+        "email": "jorge.salazar@empresa.com"
+    },
+    {
+        "nombre": "Camila",
+        "apellido": "Pérez",
+        "telefono": "3044455667",
+        "ciudad": "Cali",
+        "edad": 23,
+        "email": "camila.perez@gmail.com"
+    },
+    {
+        "nombre": "Santiago",
+        "apellido": "Herrera",
+        "telefono": "3151237894",
+        "ciudad": "Cartagena",
+        "edad": 27,
+        "email": "santiago.herrera@correo.com"
+    }
+]
