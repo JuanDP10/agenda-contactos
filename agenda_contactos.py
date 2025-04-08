@@ -88,32 +88,36 @@ def buscar_contactos():
     while True:
         limpiar_pantalla()
         print_encabezado("\U0001F50D BÚSQUEDA DE CONTACTOS")
-        print("1. Buscar por ciudad \U0001F3D9️")
-        print("2. Buscar por edad mínima \U0001F464")
-        print("3. Buscar por nombre o apellido \U0001F464")
-        print("0. Volver al menú principal \U0001F519")
-        opcion = input("Seleccione una opción: ").strip()
-
-        if opcion == '1':
-            ciudad = solicitar_campo("Ingrese la ciudad: ")
-            ciudad_normalizada = normalizar_texto(ciudad)
-            encontrados = [c for c in agenda if normalizar_texto(c['ciudad']) == ciudad_normalizada]  # Filtra contactos por ciudad
-            mostrar_contactos(encontrados)
-        elif opcion == '2':
-            edad_min = solicitar_campo("Edad mínima: ", validar_edad)
-            encontrados = [c for c in agenda if c['edad'] >= int(edad_min)]  # Filtra por edad mínima
-            mostrar_contactos(encontrados)
-        elif opcion == '3':
-            texto_busqueda = solicitar_campo("Ingrese nombre o apellido: ")
-            texto_normalizado = normalizar_texto(texto_busqueda)
-            encontrados = [c for c in agenda if texto_normalizado in normalizar_texto(c['nombre']) or 
-                           texto_normalizado in normalizar_texto(c['apellido'])]
-            mostrar_contactos(encontrados)
-        elif opcion == '0':
-            return  # Regresa al menú principal
+        if not agenda:
+            print(Fore.YELLOW + "[!] No hay contactos registrados.")
+            return
         else:
-            print(Fore.RED + "[!] Opción no válida.")
-        input(Fore.YELLOW + "\nPresiona Enter para continuar...")
+            print("1. Buscar por ciudad \U0001F3D9️")
+            print("2. Buscar por edad mínima \U0001F464")
+            print("3. Buscar por nombre o apellido \U0001F464")
+            print("0. Volver al menú principal \U0001F519")
+            opcion = input("Seleccione una opción: ").strip()
+
+            if opcion == '1':
+                ciudad = solicitar_campo("Ingrese la ciudad: ")
+                ciudad_normalizada = normalizar_texto(ciudad)
+                encontrados = [c for c in agenda if normalizar_texto(c['ciudad']) == ciudad_normalizada]  # Filtra contactos por ciudad
+                mostrar_contactos(encontrados)
+            elif opcion == '2':
+                edad_min = solicitar_campo("Edad mínima: ", validar_edad)
+                encontrados = [c for c in agenda if c['edad'] >= int(edad_min)]  # Filtra por edad mínima
+                mostrar_contactos(encontrados)
+            elif opcion == '3':
+                texto_busqueda = solicitar_campo("Ingrese nombre o apellido: ")
+                texto_normalizado = normalizar_texto(texto_busqueda)
+                encontrados = [c for c in agenda if texto_normalizado in normalizar_texto(c['nombre']) or 
+                            texto_normalizado in normalizar_texto(c['apellido'])]
+                mostrar_contactos(encontrados)
+            elif opcion == '0':
+                return  # Regresa al menú principal
+            else:
+                print(Fore.RED + "[!] Opción no válida.")
+            input(Fore.YELLOW + "\nPresiona Enter para continuar...")
 
 # Función que guarda la lista de contactos en un archivo JSON
 def guardar_en_archivo():
