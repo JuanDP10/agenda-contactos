@@ -17,7 +17,6 @@
 - [📝 Ejemplo de JSON](#-ejemplo-de-json)
 - [⚙️ Personalización](#️-personalización)
 - [❓ Preguntas Frecuentes](#-preguntas-frecuentes)
-- [🤝 Contribuir](#-contribuir)
 - [📜 Licencia](#-licencia)
 
 ## 🌟 Descripción
